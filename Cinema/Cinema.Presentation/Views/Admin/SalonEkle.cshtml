@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Salon Ekle";
+}
+
+<div class="glass-card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">Yeni Salon Ekle</h2>
+        </div>
+        <div class="card-actions">
+            <a asp-action="Salonlar" class="card-btn">Geri Dön</a>
+        </div>
+    </div>
+    @if (TempData["Error"] != null)
+    {
+        <p style="color:red;">@TempData["Error"]</p>
+    }
+    <form method="post" style="padding:20px;">
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Salon Adı</label>
+            <input type="text" name="Name" class="form-control" style="width:11%;" required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Kapasite</label>
+            <input type="number" name="Capacity" class="form-control" style="width:11%;" required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Konum</label>
+            <input type="text" name="City" class="form-control" placeholder="Örn: Ankara" style="width:11%;" required />
+        </div>
+        <button type="submit" class="card-btn">Kaydet</button>
+    </form>
+</div>

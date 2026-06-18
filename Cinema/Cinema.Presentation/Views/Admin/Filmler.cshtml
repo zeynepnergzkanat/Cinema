@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Cinema.Presentation.Models.FilmDto>
+@{
+    ViewData["Title"] = "Filmler";
+}
+
+<div class="glass-card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">Film Listesi</h2>
+        </div>
+        <div class="card-actions">
+            <a asp-action="FilmEkle" class="card-btn">Yeni Film Ekle</a>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Film Adı</th>
+                    <th>Tür</th>
+                    <th>Süre</th>
+                    <th>Vizyon Tarihi</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var film in Model)
+                {
+                    <tr>
+                        <td>@film.Title</td>
+                        <td>@film.Genre</td>
+                        <td>@film.DurationMinutes dk</td>
+                        <td>@film.ReleaseDate.ToString("dd.MM.yyyy")</td>
+                        <td>
+                            <a asp-action="FilmDuzenle" asp-route-id="@film.Id" class="card-btn">Düzenle</a>
+                            <form method="post" asp-action="FilmSil" style="display:inline;">
+                                <input type="hidden" name="id" value="@film.Id" />
+                                <button type="submit" class="card-btn">Sil</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿@model Cinema.Presentation.Models.FilmDto
+
+<div class="item" style="height:500px; display:flex; flex-direction:column;">
+    <div style="height:320px; overflow:hidden; border-radius:23px;">
+        <img src="@Model.ImageUrl" alt="@Model.Title" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding-top:10px;">
+        <div>
+            <h4>@Model.Title<br><span>@Model.Genre</span></h4>
+            <ul>
+                <li style="color:#fff;">@Model.DurationMinutes dk</li>
+            </ul>
+        </div>
+        <div class="main-button mt-2">
+            <a asp-controller="Film" asp-action="Detail" asp-route-id="@Model.Id">Seanslar</a>
+        </div>
+    </div>
+</div>

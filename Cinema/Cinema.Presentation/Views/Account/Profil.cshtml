@@ -1,0 +1,45 @@
+﻿@model Cinema.Presentation.Models.AuthResponse
+@{
+    ViewData["Title"] = "Profilim";
+}
+
+<div class="game-details">
+    <div class="heading-section">
+        <h4><em>Profilim</em></h4>
+    </div>
+
+    @if (TempData["Error"] != null)
+    {
+        <p style="color:red;">@TempData["Error"]</p>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <p style="color:green;">@TempData["Success"]</p>
+    }
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="heading-section">
+                <h4><em>Bilgilerimi</em> Güncelle</h4>
+            </div>
+            <form method="post" asp-action="ProfilGuncelle">
+                <div style="margin-bottom:15px;">
+                    <label style="display:inline-block; width:150px; color:white;">Ad</label>
+                    <input type="text" name="firstName" value="@Model.FirstName" class="form-control" style="width:100%;" required />
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:inline-block; width:150px; color:white;">Soyad</label>
+                    <input type="text" name="lastName" value="@Model.LastName" class="form-control" style="width:100%;" required />
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:inline-block; width:150px; color:white;">Email</label>
+                    <input type="text" value="@Model.Email" class="form-control" style="width:100%;" disabled />
+                </div>
+                <div class="main-button mt-3">
+                    <button type="submit">Güncelle</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>

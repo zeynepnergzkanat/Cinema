@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Cinema.Presentation.Models.SepetDto>
+@{
+    ViewData["Title"] = "Ödeme";
+    var toplam = Model.Sum(x => x.Quantity * x.UnitPrice);
+}
+
+<div class="most-popular">
+    <div class="heading-section">
+        <h4><em>Ödeme</em></h4>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="heading-section">
+                <h4><em>Sipariş</em> Özeti</h4>
+            </div>
+            <table class="table" style="color:#fff; width:100%;">
+                <thead>
+                    <tr>
+                        <th>Film</th>
+                        <th>Adet</th>
+                        <th>Tutar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.FilmTitle</td>
+                            <td>@item.Quantity</td>
+                            <td>@((item.Quantity * item.UnitPrice).ToString("C"))</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td><strong>Toplam</strong></td>
+                        <td></td>
+                        <td><strong>@toplam.ToString("C")</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <div class="heading-section">
+                <h4><em>Kart</em> Bilgileri</h4>
+            </div>
+            <form method="post" asp-action="OdemeYap">
+                <div class="mb-3">
+                    <p>Kart Sahibi</p>
+                    <input type="text" name="cardHolderName" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <p>Kart Numarası</p>
+                    <input type="text" name="cardNumber" class="form-control" maxlength="16" required />
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <p>Son Kullanma</p>
+                            <input type="text" name="expiryDate" placeholder="MM/YY" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <p>CVV</p>
+                            <input type="text" name="cvv" maxlength="3" class="form-control" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 mt-3">
+                    <input type="submit" value="Ödemeyi Tamamla" class="form-control" style="background-color:#e75e8d; color:#fff; border:none; border-radius:25px; cursor:pointer;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@model Cinema.Presentation.Models.FilmDto
+@{
+    ViewData["Title"] = "Film Düzenle";
+}
+<div class="glass-card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">Film Düzenle</h2>
+        </div>
+        <div class="card-actions">
+            <a asp-action="Filmler" class="card-btn">Geri Dön</a>
+        </div>
+    </div>
+    <form method="post" style="padding:20px;">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Film Adı</label>
+            <input type="text" name="Title" value="@Model.Title" class="form-control" style="width:30%;" required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Açıklama</label>
+            <textarea name="Description" class="form-control" rows="3" style="width:30%;" required>@Model.Description</textarea>
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Afiş URL</label>
+            <input type="text" name="ImageUrl" value="@Model.ImageUrl" class="form-control" style="width:30%;" required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Tür</label>
+            <input type="text" name="Genre" value="@Model.Genre" class="form-control" style="width:30%;" required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Süre (dakika)</label>
+            <input type="number" name="DurationMinutes" value="@Model.DurationMinutes" class="form-control" style="width:30%;" required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Vizyon Tarihi</label>
+            <input type="date" name="ReleaseDate" value="@Model.ReleaseDate.ToString("yyyy-MM-dd")" class="form-control" style="width:30%;" required />
+        </div>
+        <button type="submit" class="card-btn">Güncelle</button>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="most-popular">
+    <div class="row justify-content-center">
+        <div class="col-lg-4">
+            <div class="heading-section">
+                <h4><em>Kayıt</em> Ol</h4>
+            </div>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            }
+            <form method="post">
+                <div class="mb-3">
+                    <p>Ad</p>
+                    <input type="text" name="firstName" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <p>Soyad</p>
+                    <input type="text" name="lastName" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <p>Email</p>
+                    <input type="email" name="email" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <p>Şifre</p>
+                    <input type="password" name="password" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <input type="submit" value="Kayıt Ol" class="form-control" style="background-color:#e75e8d; color:#fff; border:none; border-radius:25px; cursor:pointer;" />
+                </div>
+                <p>Zaten hesabın var mı? <a asp-action="Login">Giriş Yap</a></p>
+            </form>
+        </div>
+    </div>
+</div>

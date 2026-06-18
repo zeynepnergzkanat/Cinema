@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Cinema.Presentation.Models.FilmDto>
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="main-banner">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="header-text">
+                <h6>Hoş Geldiniz</h6>
+                <h4><em>Vizyondaki</em> Filmleri Keşfedin</h4>
+                <div class="main-button">
+                    <a asp-controller="Film" asp-action="Index">Filmlere Göz At</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="most-popular">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="heading-section">
+                <h4><em>Vizyondaki</em> Filmler</h4>
+            </div>
+            <div class="row">
+                @foreach (var film in Model)
+                {
+                    <div class="col-lg-3 col-sm-6">
+                        @await Component.InvokeAsync("FilmCard", new { film = film })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

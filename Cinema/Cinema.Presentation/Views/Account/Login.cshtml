@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<div class="most-popular">
+    <div class="row justify-content-center">
+        <div class="col-lg-4">
+            <div class="heading-section">
+                <h4><em>Giriş</em> Yap</h4>
+            </div>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            }
+            <form method="post">
+                <div class="mb-3">
+                    <p>Email</p>
+                    <input type="email" name="email" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <p>Şifre</p>
+                    <input type="password" name="password" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <input type="submit" value="Giriş Yap" class="form-control" style="background-color:#e75e8d; color:#fff; border:none; border-radius:25px; cursor:pointer;" />
+                </div>
+                <p>Hesabın yok mu? <a asp-action="Register">Kayıt Ol</a></p>
+            </form>
+        </div>
+    </div>
+</div>

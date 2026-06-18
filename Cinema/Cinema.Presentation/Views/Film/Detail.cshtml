@@ -1,0 +1,26 @@
+﻿@model Cinema.Presentation.Models.FilmDto
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="game-details">
+    <div class="row">
+        <div class="col-lg-4">
+            <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid" style="border-radius:23px;">
+        </div>
+        <div class="col-lg-8">
+            <div class="header-text">
+                <h4>@Model.Title</h4>
+                <p style="color:#aaa; font-weight:400; font-size:14px;">@Model.Genre</p>
+                <ul>
+                    <li style="color:#fff;">@Model.DurationMinutes dk</li>
+                    <li style="color:#fff;">@Model.ReleaseDate.ToString("dd.MM.yyyy")</li>
+                </ul>
+                <p>@Model.Description</p>
+                <div class="main-button mt-5">
+                    <a asp-controller="Seans" asp-action="Index" asp-route-filmId="@Model.Id">Seansları Gör ve Bilet Al</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Film Ekle";
+}
+<div class="glass-card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">Yeni Film Ekle</h2>
+        </div>
+        <div class="card-actions">
+            <a asp-action="Filmler" class="card-btn">Geri Dön</a>
+        </div>
+    </div>
+    @if (TempData["Error"] != null)
+    {
+        <p style="color:red;">@TempData["Error"]</p>
+    }
+    <form method="post" style="padding:20px;">
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Film Adı</label>
+            <input type="text" name="Title" class="form-control" style="width:30%;" required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px; vertical-align:top; margin-top:5px;">Açıklama</label>
+            <textarea name="Description" class="form-control" rows="3" style="width:30%;" required></textarea>
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Afiş URL</label>
+            <input type="text" name="ImageUrl" class="form-control" style="width:30%;" required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Tür</label>
+            <input type="text" name="Genre" class="form-control" style="width:30%;" required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Süre (dakika)</label>
+            <input type="number" name="DurationMinutes" class="form-control" style="width:30%;" required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Vizyon Tarihi</label>
+            <input type="date" name="ReleaseDate" class="form-control" style="width:30%;" required />
+        </div>
+        <button type="submit" class="card-btn">Kaydet</button>
+    </form>
+</div>

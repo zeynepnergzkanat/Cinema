@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Cinema.Presentation.Models.FilmDto>
+@{
+    ViewData["Title"] = "Filmler";
+}
+
+<div class="most-popular">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="heading-section">
+                <h4><em>Vizyondaki</em> Filmler</h4>
+            </div>
+            <div class="row">
+                @foreach (var film in Model)
+                {
+                    <div class="col-lg-3 col-sm-6">
+                        @await Component.InvokeAsync("FilmCard", new { film = film })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

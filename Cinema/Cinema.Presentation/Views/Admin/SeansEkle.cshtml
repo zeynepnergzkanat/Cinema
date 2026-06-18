@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Seans Ekle";
+    var filmler = ViewBag.Filmler as IEnumerable<Cinema.Presentation.Models.FilmDto>;
+    var salonlar = ViewBag.Salonlar as IEnumerable<Cinema.Presentation.Models.SalonDto>;
+}
+
+<div class="glass-card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">Yeni Seans Ekle</h2>
+        </div>
+        <div class="card-actions">
+            <a asp-action="Seanslar" class="card-btn">Geri Dön</a>
+        </div>
+    </div>
+    @if (TempData["Error"] != null)
+    {
+        <p style="color:red;">@TempData["Error"]</p>
+    }
+    <form method="post" style="padding:20px;">
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Film</label>
+            <select name="FilmId" class="form-control" style="color:#000;"  required>
+                <option value="">Film Seçin</option>
+                @foreach (var film in filmler!)
+                {
+                    <option value="@film.Id">@film.Title</option>
+                }
+            </select>
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Salon</label>
+            <select style ="width:11%;" name="SalonId" class="form-control" required>
+                <option value="">Salon Seçin</option>
+                @foreach (var salon in salonlar!)
+                {
+                    <option value="@salon.Id">@salon.Name (@salon.City)</option>
+                }
+            </select>
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Seans Saati</label>
+            <input type="datetime-local" name="StartTime" class="form-control" style="width:11%;"  required />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:150px;">Bilet Fiyatı</label>
+            <input type="number" name="Price" step="0.01" class="form-control" style="width:11%;" required />
+        </div>
+        <button type="submit" class="card-btn">Kaydet</button>
+    </form>
+</div>

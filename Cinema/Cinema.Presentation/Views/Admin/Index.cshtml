@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="stats-grid">
+    <div class="glass-card glass-card-3d stat-card">
+        <div class="stat-card-inner">
+            <div class="stat-info">
+                <h3>Filmler</h3>
+                <a asp-action="Filmler" class="card-btn mt-2">Filmleri Yönet</a>
+            </div>
+        </div>
+    </div>
+    <div class="glass-card glass-card-3d stat-card">
+        <div class="stat-card-inner">
+            <div class="stat-info">
+                <h3>Seanslar</h3>
+                <a asp-action="Seanslar" class="card-btn mt-2">Seansları Yönet</a>
+            </div>
+        </div>
+    </div>
+    <div class="glass-card glass-card-3d stat-card">
+        <div class="stat-card-inner">
+            <div class="stat-info">
+                <h3>Salonlar</h3>
+                <a asp-action="Salonlar" class="card-btn mt-2">Salonları Yönet</a>
+            </div>
+        </div>
+    </div>
+</section>

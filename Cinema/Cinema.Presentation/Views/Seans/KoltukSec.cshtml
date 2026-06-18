@@ -1,0 +1,90 @@
+﻿@model Cinema.Presentation.Models.SeansDto
+@{
+    ViewData["Title"] = "Koltuk Seç";
+    var biletTipi = ViewBag.BiletTipi as string ?? "Tam";
+    var doluKoltuklar = ViewBag.DoluKoltuklar as List<string> ?? new List<string>();
+    var satirlar = Enumerable.Range('A', 12).Select(c => ((char)c).ToString()).ToArray();
+    var tumKoltuklar = satirlar.SelectMany(s => Enumerable.Range(1, 10).Select(i => $"{s}{i}")).ToList();
+    var biletAdedi = ViewBag.BiletAdedi as int? ?? 0;
+}
+
+<div class="game-details">
+    <div class="heading-section">
+        <h4><em>Koltuk</em> Seç</h4>
+    </div>
+
+    <div class="mb-4">
+        <p>@Model.FilmTitle — @Model.SalonName — @Model.StartTime.ToString("dd.MM.yyyy HH:mm")</p>
+        <p>Bilet Türü: <strong>@biletTipi</strong></p>
+    </div>
+
+    @if (biletAdedi == 0)
+    {
+        <form method="get" asp-action="KoltukSec">
+            <input type="hidden" name="seansId" value="@Model.Id" />
+            <input type="hidden" name="biletTipi" value="@biletTipi" />
+            <div class="mb-4">
+                <h4>Kaç tane bilet almak istiyorsunuz?</h4>
+                <div class="mt-3">
+                    <input type="number" name="biletAdedi" min="1" max="10" value="1" class="form-control" style="width:100px;" />
+                </div>
+            </div>
+            <div class="main-button">
+                <button type="submit">Devam Et</button>
+            </div>
+        </form>
+    }
+    else
+    {
+        @if (TempData["Error"] != null)
+        {
+            <div class="mb-3">
+                <p>@TempData["Error"]</p>
+            </div>
+        }
+
+        <p class="mb-4">Lütfen <strong>@biletAdedi</strong> koltuk seçin.</p>
+
+        <form method="post" asp-action="SepeteEkle">
+            <input type="hidden" name="seansId" value="@Model.Id" />
+            <input type="hidden" name="biletTipi" value="@biletTipi" />
+            <input type="hidden" name="biletAdedi" value="@biletAdedi" />
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="~/assets/images/salon.png" alt="Salon" class="img-fluid" style="border-radius:10px;" />
+                    <p class="mt-2">* Görseldeki koltuk düzeni bilgi amaçlıdır. Dolu koltuklar (Dolu) olarak işaretlidir.</p>
+                    <div class="main-button mt-4">
+                        <button type="submit">Sepete Ekle</button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <details>
+                        <summary style="cursor:pointer; color:#fff; font-size:16px; padding:10px; background:#27292a; border-radius:10px;">
+                            Koltuk Listesi (tıklayın)
+                        </summary>
+                        <div style="height:400px; overflow-y:auto; background:#27292a; border-radius:0 0 10px 10px; padding:15px;">
+                            @foreach (var koltuk in tumKoltuklar)
+                            {
+                                var dolu = doluKoltuklar.Contains(koltuk);
+                                <div style="border-bottom:1px solid #444; padding:8px 0;">
+                                    @if (dolu)
+                                    {
+                                        <span style="color:#666;">@koltuk — Dolu</span>
+                                    }
+                                    else
+                                    {
+                                        <label style="color:#fff; cursor:pointer;">
+                                            <input type="checkbox" name="koltuklar" value="@koltuk" style="margin-right:8px;" />
+                                            @koltuk
+                                        </label>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </form>
+    }
+</div>

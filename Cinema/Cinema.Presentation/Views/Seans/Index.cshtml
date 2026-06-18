@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Cinema.Presentation.Models.SeansDto>
+@{
+    ViewData["Title"] = "Seanslar";
+    var sehirler = ViewBag.Sehirler as List<string> ?? new List<string>();
+    var secilenSehir = ViewBag.SecilenSehir as string ?? "";
+    var filmId = ViewBag.FilmId as Guid? ?? Guid.Empty;
+}
+
+<div class="game-details">
+    <div class="heading-section">
+        <h4><em>Seanslar</em></h4>
+    </div>
+
+    <div class="mb-4">
+        <form method="get" asp-action="Index">
+            <input type="hidden" name="filmId" value="@filmId" />
+            <select name="sehir" class="form-control" onchange="this.form.submit()">
+                <option value="@secilenSehir">@secilenSehir  — Diğer Konumlar</option>
+                @foreach (var sehir in sehirler.Where(s => s != secilenSehir))
+                {
+                    <option value="@sehir">@sehir</option>
+                }
+            </select>
+        </form>
+    </div>
+    @if (!Model.Any())
+    {
+        <p>Bu konumda seans bulunamadı.</p>
+    }
+    else
+    {
+        <table class="table" style="color:#fff; width:100%;">
+            <thead>
+                <tr>
+                    <th>Film</th>
+                    <th>Salon</th>
+                    <th>Konum</th>
+                    <th>Saat</th>
+                    <th>Tam Fiyat</th>
+                    <th>Öğrenci Fiyatı</th>
+                    <th>Bilet</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var seans in Model)
+                {
+                    <tr>
+                        <td>@seans.FilmTitle</td>
+                        <td>@seans.SalonName</td>
+                        <td>@seans.City</td>
+                        <td>@seans.StartTime.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>@seans.Price.ToString("C")</td>
+                        <td>@((seans.Price * 0.8m).ToString("C"))</td>
+                        <td>
+                            <form method="get" asp-action="KoltukSec">
+                                <input type="hidden" name="seansId" value="@seans.Id" />
+                                <div class="mb-1">
+                                    <small style="color:#aaa;">Bilet Türü</small>
+                                    <select name="biletTipi" class="form-control" style="width:130px;">
+                                        <option value="Tam">Tam Bilet</option>
+                                        <option value="Ogrenci">Öğrenci Bileti</option>
+                                    </select>
+                                </div>
+                                <div class="main-border-button mt-3">
+                                    <button type="submit">Koltuk Seç</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

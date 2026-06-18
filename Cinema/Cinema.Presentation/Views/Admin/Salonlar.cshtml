@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Cinema.Presentation.Models.SalonDto>
+@{
+    ViewData["Title"] = "Salonlar";
+}
+
+<div class="glass-card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">Salon Listesi</h2>
+        </div>
+        <div class="card-actions">
+            <a asp-action="SalonEkle" class="card-btn">Yeni Salon Ekle</a>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Salon Adı</th>
+                    <th>Konum</th>
+                    <th>Kapasite</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var salon in Model)
+                {
+                    <tr>
+                        <td>@salon.Name</td>
+                        <td>@salon.City</td>
+                        <td>@salon.Capacity</td>
+                        <td>
+                            <form method="post" asp-action="SalonSil">
+                                <input type="hidden" name="id" value="@salon.Id" />
+                                <button type="submit" class="card-btn">Sil</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

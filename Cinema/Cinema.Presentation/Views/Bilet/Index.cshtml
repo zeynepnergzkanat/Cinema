@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Cinema.Presentation.Models.BiletDto>
+@{
+    ViewData["Title"] = "Biletlerim";
+}
+
+<div class="game-details">
+    <div class="heading-section">
+        <h4><em>Biletlerim</em></h4>
+    </div>
+    @if (!Model.Any())
+    {
+        <p>Henüz bilet satın almadınız.</p>
+    }
+    else
+    {
+        <table class="table" style="color:#fff; width:100%;">
+            <thead>
+                <tr>
+                    <th>Film</th>
+                    <th>Salon</th>
+                    <th>Seans</th>
+                    <th>Bilet Tipi</th>
+                    <th>Adet</th>
+                    <th>Toplam</th>
+                    <th>Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bilet in Model)
+                {
+                    <tr>
+                        <td>@bilet.FilmTitle</td>
+                        <td>@bilet.SalonName</td>
+                        <td>@bilet.StartTime.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>@bilet.BiletTipi</td>
+                        <td>@bilet.Quantity</td>
+                        <td>@bilet.TotalPrice.ToString("C")</td>
+                        <td>@bilet.CreatedAt.ToString("dd.MM.yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
